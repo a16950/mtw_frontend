@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Student } from './student';
 import { Course } from '../courses/course';
-import { StudentService } from './student.service';
 import { EvaluationComponent } from '../courses/evaluation-components/evaluation-component';
-import { Router } from '@angular/router';
+import { StudentService } from './student.service';
+import { Student } from './student';
 
 @Component({
   selector: 'app-students',
@@ -14,29 +13,33 @@ export class StudentsComponent implements OnInit {
   students: Student[] = [];
 
   @Input() evaluationComponent?: EvaluationComponent;
+  @Input() course?: Course;
+
 
   constructor(private studentService: StudentService) {}
 
   ngOnInit(): void {
-    this.evaluationComponent = history.state;
+    this.evaluationComponent = history.state.evaluationComponent;
+    this.course = history.state.course;
     this.getStudents();
   }
 
   getStudents(): void {
-    if (this.evaluationComponent)
+    if (this.evaluationComponent) {
       this.studentService
         .getStudents(this.evaluationComponent)
-        .subscribe((response) => (this.students = response));
+        .subscribe((response) => this.students = response);
+    }
   }
 
-  add(name: string): void {
-    name = name.trim();
-    if (!name) {
-      return;
+  add(name: string): void {name = name.trim(); if (!name) { return; }
+    if (this.evaluationComponent)
+    {
+    this.studentService.addStudent(this.evaluationComponent, { name } as Student)
+      .subscribe(student => {
+        this.students.push(student);
+      });
     }
-    this.studentService.addStudent({ name } as Student).subscribe((student) => {
-      this.students.push(student);
-    });
   }
 
   delete(student: Student): void {

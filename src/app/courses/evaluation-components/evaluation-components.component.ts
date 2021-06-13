@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Course } from '../../courses/course';
 import { EvaluationComponentService } from './evaluation-component.service';
 import { EvaluationComponent } from './evaluation-component';
-import { CourseService } from '../course.service';
 
 @Component({
   selector: 'app-evaluation-components',
@@ -21,9 +20,6 @@ export class EvaluationComponentsComponent implements OnInit {
     this.getEvaluationComponents();
   }
 
-  ngOnChanges(course: Course): void {
-    this.getEvaluationComponents();
-  }
 
   getEvaluationComponents(): void {
     if (this.course) {
@@ -33,9 +29,7 @@ export class EvaluationComponentsComponent implements OnInit {
     }
   }
 
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
+  add(name: string): void {name = name.trim(); if (!name) { return; }
     if (this.course)
     {
     this.evaluationComponentService.addEvaluation(this.course, { name } as EvaluationComponent)

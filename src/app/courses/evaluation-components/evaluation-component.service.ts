@@ -5,7 +5,6 @@ import { catchError, tap } from 'rxjs/operators';
 import { ServiceHelpers } from '../../service-helpers';
 import { EvaluationComponent } from './evaluation-component';
 import { Course } from '../../courses/course';
-import { EvaluationComponentsComponent } from './evaluation-components.component';
 
 @Injectable({
   providedIn: 'root',
@@ -41,10 +40,7 @@ export class EvaluationComponentService {
     return `${this.baseUrl}/${course._id}/${this.evaluationPath}`;
   }
 
-  addEvaluation(
-    course: Course,
-    evaluation: EvaluationComponent
-  ): Observable<EvaluationComponent> {
+  addEvaluation(course: Course, evaluation: EvaluationComponent): Observable<EvaluationComponent> {
     return this.http
       .post<EvaluationComponent>(
         this.buildEvaluationUrl(course),

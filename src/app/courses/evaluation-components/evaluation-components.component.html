@@ -21,10 +21,10 @@
   <button button mat-raised-button color="accent" (click)=delete(evaluationComponent)>Eliminar</button>
         &nbsp;
   <button button mat-raised-button color="accent" routerLink="/edit_discipline"
-        [state]="{evaluation:evaluationComponent, course:course}">Editar</button>
+        [state]="{evaluationComponent:evaluationComponent, course:course}">Editar</button>
         &nbsp;
   <button button mat-raised-button color="accent" routerLink="/students"
-        [state]="evaluationComponent">Turma</button>
+        [state]="{evaluationComponent:evaluationComponent, course:course}">Turma</button>
   </mat-expansion-panel>
   </mat-accordion>
 </mat-card>

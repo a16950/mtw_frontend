@@ -11,7 +11,7 @@ import { Student } from './student';
   providedIn: 'root',
 })
 export class StudentService {
-  private baseUrl = 'http://localhost:3000/evaluation-components';
+  private baseUrl = 'http://localhost:3000/courses';
   private studentPath = 'students';
 
   httpOptions = {
@@ -23,14 +23,16 @@ export class StudentService {
     private serviceHelpers: ServiceHelpers
   ) {}
 
-  getStudents(evaluation: EvaluationComponent): Observable<Student[]> {
-    const url = this.buildStudentUrl(evaluation);
+  getStudents(evaluationcomponent: EvaluationComponent): Observable<Student[]> {
+    const url = this.buildStudentUrl(evaluationcomponent);
     return this.http
       .get<Student[]>(url)
       .pipe(
         catchError(
           this.serviceHelpers.handleError<Student[]>(
-            'getStudents', [])
+            'getStudents',
+            []
+          )
         )
       );
   }
@@ -39,19 +41,17 @@ export class StudentService {
     return `${this.baseUrl}/${evaluation._id}/${this.studentPath}`;
   }
 
-  addStudent(evaluation: EvaluationComponent): Observable<Student> {
+  addStudent(evaluation: EvaluationComponent, student: Student): Observable<Student> {
     return this.http
       .post<Student>(
         this.buildStudentUrl(evaluation),
-        evaluation,
+        student,
         this.httpOptions
       )
       .pipe(catchError(this.serviceHelpers.handleError<Student>('addStudent')));
   }
 
-  deleteStudent(
-    id: number,
-    evaluationComponent: EvaluationComponent
+  deleteStudent(id: number, evaluationComponent: EvaluationComponent
   ): Observable<Student> {
     const ur = this.buildStudentUrl(evaluationComponent);
     const url = `${ur}/${id}`;

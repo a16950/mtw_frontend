@@ -1,28 +1,31 @@
-
 <br>
-<mat-card>
-  <h2>Students</h2>
-  <label matInput for="new-student">Student name: </label>
+
+<mat-card *ngIf="evaluationComponent && course">
+  <h2>Alunos de {{evaluationComponent.name}}</h2>
+  <h2>{{course.name}}</h2>
+  <label matInput for="new-student">Nome do Aluno: </label>
   <textarea matInput id="new-student" #studentName></textarea>
 
   <button mat-raised-button color="accent" (click)="add(studentName.value); studentName.value=''">
-    Add student
+    Adicionar Aluno
   </button>
-</mat-card>
-<br>
+  &nbsp;
+  <button mat-raised-button color="accent" routerLink="/disciplines">
+    Voltar
+  </button>
 
-<mat-card>
   <mat-accordion multi="true">
     <mat-expansion-panel *ngFor="let student of students">
       <mat-expansion-panel-header>
         {{ student.name }}
       </mat-expansion-panel-header>
-  <button button mat-raised-button color="accent"
-        (click)="delete(student)">Eliminar</button>
+  <button button mat-raised-button color="accent" (click)=delete(student)>Eliminar</button>
         &nbsp;
   <button button mat-raised-button color="accent" routerLink="/edit_student"
-        [state]="student">Editar</button>
+        [state]="{student:student, evaluationComponent:evaluationComponent}">Editar</button>
         &nbsp;
+  <button button mat-raised-button color="accent" routerLink="/grades"
+        [state]="student">Hmmm</button>
   </mat-expansion-panel>
   </mat-accordion>
 </mat-card>
