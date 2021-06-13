@@ -1,0 +1,28 @@
+
+<br>
+<mat-card>
+  <h2>Students</h2>
+  <label matInput for="new-student">Student name: </label>
+  <textarea matInput id="new-student" #studentName></textarea>
+
+  <button mat-raised-button color="accent" (click)="add(studentName.value); studentName.value=''">
+    Add student
+  </button>
+</mat-card>
+<br>
+
+<mat-card>
+  <mat-accordion multi="true">
+    <mat-expansion-panel *ngFor="let student of students">
+      <mat-expansion-panel-header>
+        {{ student.name }}
+      </mat-expansion-panel-header>
+  <button button mat-raised-button color="accent"
+        (click)="delete(student)">Eliminar</button>
+        &nbsp;
+  <button button mat-raised-button color="accent" routerLink="/edit_student"
+        [state]="student">Editar</button>
+        &nbsp;
+  </mat-expansion-panel>
+  </mat-accordion>
+</mat-card>

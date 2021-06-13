@@ -4,12 +4,14 @@ import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { CoursesComponent } from './courses/courses.component';
 import { EvaluationComponentsComponent } from './courses/evaluation-components/evaluation-components.component';
 import { EvaluationDetailComponent } from './evaluation-detail/evaluation-detail.component';
+import { StudentsComponent } from './students/students.component';
 
 const routes: Routes = [
   {path: "", component:CoursesComponent},
   {path: "edit_course", component:CourseDetailComponent},
   {path: "disciplines", component:EvaluationComponentsComponent},
   {path: "edit_discipline", component:EvaluationDetailComponent},
+  {path: "students", component:StudentsComponent}
 ];
 
 @NgModule({

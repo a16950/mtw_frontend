@@ -16,6 +16,7 @@ import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { EvaluationComponentsComponent } from './courses/evaluation-components/evaluation-components.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EvaluationDetailComponent } from './evaluation-detail/evaluation-detail.component';
+import { StudentsComponent } from './students/students.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { EvaluationDetailComponent } from './evaluation-detail/evaluation-detail
     CoursesComponent,
     CourseDetailComponent,
     EvaluationComponentsComponent,
-    EvaluationDetailComponent
+    EvaluationDetailComponent,
+    StudentsComponent
   ],
   imports: [
     BrowserModule,
