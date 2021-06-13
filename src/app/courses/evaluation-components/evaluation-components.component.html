@@ -1,11 +1,30 @@
-<p>evaluation-components works!</p>
+<br>
 
-<div *ngIf="course">
-<ul class="evaluation-components">
-    <li
-      *ngFor="let evaluationComponent of evaluationComponents"
-    >
-      {{ evaluationComponent.name }}
-    </li>
-  </ul>
-</div>
+<mat-card *ngIf="course">
+  <h2>Disciplinas de {{course.name}}</h2>
+  <label matInput for="new-discipline">Nome da Disciplinas: </label>
+  <textarea matInput id="new-discipline" #disciplineName></textarea>
+
+  <button mat-raised-button color="accent" (click)="add(disciplineName.value); disciplineName.value=''">
+    Adicionar Disciplina
+  </button>
+  &nbsp;
+  <button mat-raised-button color="accent" routerLink="/">
+    Voltar
+  </button>
+
+  <mat-accordion multi="true">
+    <mat-expansion-panel *ngFor="let evaluationComponent of evaluationComponents">
+      <mat-expansion-panel-header>
+        {{ evaluationComponent.name }}
+      </mat-expansion-panel-header>
+  <button button mat-raised-button color="accent" (click)=delete(evaluationComponent)>Eliminar</button>
+        &nbsp;
+  <button button mat-raised-button color="accent" routerLink="/edit_discipline"
+        [state]="{evaluation:evaluationComponent, course:course}">Editar</button>
+        &nbsp;
+  <button button mat-raised-button color="accent" routerLink="/"
+        [state]="evaluationComponent">Turma</button>
+  </mat-expansion-panel>
+  </mat-accordion>
+</mat-card>

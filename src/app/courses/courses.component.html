@@ -1,27 +1,30 @@
-<h2>Courses</h2>
 
-<div>
-  <label for="new-course">Course name: </label>
-  <input id="new-course" #courseName />
+<br>
+<mat-card>
+  <h2>Courses</h2>
+  <label matInput for="new-course">Course name: </label>
+  <textarea matInput id="new-course" #courseName></textarea>
 
-  <button class="add-button" (click)="add(courseName.value); courseName.value=''">
+  <button mat-raised-button color="accent" (click)="add(courseName.value); courseName.value=''">
     Add course
   </button>
-</div>
+</mat-card>
+<br>
 
-
-<ul class="courses">
-  <li
-    *ngFor="let course of courses"
-    [class.selected]="course === selectedCourse"
-    (click)="onSelect(course)"
-  >
-    {{ course.name }}
-    <button class="delete" title="delete course"
-      (click)="delete(course)">x</button>
-  </li>
-</ul>
-
-<app-course-detail [course]="selectedCourse"></app-course-detail>
-
-<app-evaluation-components [course]="selectedCourse"></app-evaluation-components>
+<mat-card>
+  <mat-accordion multi="true">
+    <mat-expansion-panel *ngFor="let course of courses">
+      <mat-expansion-panel-header>
+        {{ course.name }}
+      </mat-expansion-panel-header>
+  <button button mat-raised-button color="accent"
+        (click)="delete(course)">Eliminar</button>
+        &nbsp;
+  <button button mat-raised-button color="accent" routerLink="/edit_course"
+        [state]="course">Editar</button>
+        &nbsp;
+  <button button mat-raised-button color="accent" routerLink="/disciplines"
+        [state]="course">Consultar Disciplinas</button>
+  </mat-expansion-panel>
+  </mat-accordion>
+</mat-card>

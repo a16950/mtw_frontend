@@ -1,5 +1,10 @@
-<div *ngIf="course">
-  <h2>{{ course.name | uppercase }} Details</h2>
+<br>
+<mat-card>
+<h1>Editar nome do Curso</h1>
+</mat-card>
+<br>
+<mat-card *ngIf="course">
+  <h2>{{ course.name | uppercase }} </h2>
   <div><span>id: </span>{{ course._id }}</div>
   <div>
     <label for="course-name">Course name: </label>
@@ -9,5 +14,8 @@
       placeholder="name"
     />
   </div>
-  <button (click)="save()">save</button>
-</div>
+  <br>
+  <button mat-raised-button color="accent" (click)="save()" routerLink="/">Guardar</button>
+  &nbsp;
+  <button mat-raised-button color="accent" routerLink="/">Cancelar</button>
+</mat-card>

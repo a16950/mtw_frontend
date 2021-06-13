@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Course } from '../../courses/course';
 import { EvaluationComponentService } from './evaluation-component.service';
 import { EvaluationComponent } from './evaluation-component';
+import { CourseService } from '../course.service';
 
 @Component({
   selector: 'app-evaluation-components',
@@ -15,7 +16,10 @@ export class EvaluationComponentsComponent implements OnInit {
 
   constructor(private evaluationComponentService: EvaluationComponentService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.course = history.state;
+    this.getEvaluationComponents();
+  }
 
   ngOnChanges(course: Course): void {
     this.getEvaluationComponents();
@@ -28,4 +32,25 @@ export class EvaluationComponentsComponent implements OnInit {
         .subscribe((response) => this.evaluationComponents = response);
     }
   }
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    if (this.course)
+    {
+    this.evaluationComponentService.addEvaluation(this.course, { name } as EvaluationComponent)
+      .subscribe(evaluation => {
+        this.evaluationComponents.push(evaluation);
+      });
+    }
+  }
+
+  delete(evaluationComponent: EvaluationComponent): void {
+    if (this.course)
+    {
+    this.evaluationComponents = this.evaluationComponents.filter(c => c !== evaluationComponent);
+    this.evaluationComponentService.deleteEvaluation(evaluationComponent._id,this.course).subscribe();
+    }
+  }
+  
 }
