@@ -19,19 +19,18 @@
         {{ student.name }}
       </mat-expansion-panel-header>
       <div *ngFor="let criteria of criterias">
-        <div><span> {{criteria.name}} - </span>{{ criteria.percent }} %
+        <div>
           <button button mat-raised-button color="accent" routerLink="/grades"
-            [state]="{evaluationComponent:evaluationComponent, course:course, student:student, criteria:criteria}">Adicionar Nota</button>
+            [state]="{evaluationComponent:evaluationComponent, course:course, student:student, criteria:criteria}">Nota {{criteria.name}} </button>
         </div>
         &nbsp;
       </div>
-      &nbsp;
-  <button button mat-raised-button color="accent" (click)=delete(student)>Eliminar</button>
+      <br>
+  <button button mat-raised-button color="accent" (click)=delete(student)>Eliminar Aluno</button>
         &nbsp;
   <button button mat-raised-button color="accent" routerLink="/edit_student"
-        [state]="{evaluation:evaluationComponent, course:course, student:student }">Editar</button>
+        [state]="{evaluation:evaluationComponent, course:course, student:student }">Editar Aluno</button>
         &nbsp;
-  <button button mat-raised-button color="accent">...</button>
   </mat-expansion-panel>
   </mat-accordion>
 </mat-card>
