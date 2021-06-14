@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { CoursesComponent } from './courses/courses.component';
 import { EvaluationComponentsComponent } from './courses/evaluation-components/evaluation-components.component';
+import { CriteriaDetailComponent } from './criteria-detail/criteria-detail.component';
 import { CriteriaComponent } from './criteria/criteria.component';
 import { EvaluationDetailComponent } from './evaluation-detail/evaluation-detail.component';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: "edit_discipline", component:EvaluationDetailComponent},
   {path: "students", component:StudentsComponent},
   {path: "edit_student", component:StudentDetailComponent},
-  {path: "criterias", component:CriteriaComponent}
+  {path: "criterias", component:CriteriaComponent},
+  {path: "edit_criteria", component:CriteriaDetailComponent}
 ];
 
 @NgModule({
