@@ -19,6 +19,7 @@ import { EvaluationDetailComponent } from './evaluation-detail/evaluation-detail
 import { StudentsComponent } from './students/students.component';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
 import { CriteriaComponent } from './criteria/criteria.component';
+import { GradesComponent } from './grades/grades.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CriteriaComponent } from './criteria/criteria.component';
     EvaluationDetailComponent,
     StudentsComponent,
     StudentDetailComponent,
+    GradesComponent,
     CriteriaComponent
   ],
   imports: [
