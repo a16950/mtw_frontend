@@ -26,6 +26,8 @@ export class GradesComponent implements OnInit {
     this.student = history.state.student;
     this.evaluationComponent = history.state.evaluationComponent;
     this.course = history.state.course;
+    console.log(this.evaluationComponent);
+    console.log(this.course);
     this.getGrades();
   }
 

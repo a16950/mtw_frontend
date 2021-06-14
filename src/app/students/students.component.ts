@@ -29,9 +29,8 @@ export class StudentsComponent implements OnInit {
     this.course = history.state.course;
     this.getStudents();
     this.getCriteria();
-
   }
-  
+
   getStudents():void
   {
     if (this.evaluationComponent && this.course)
