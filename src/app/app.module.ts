@@ -18,7 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EvaluationDetailComponent } from './evaluation-detail/evaluation-detail.component';
 import { StudentsComponent } from './students/students.component';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
-import { GradesComponent } from './grades/grades.component';
+import { CriteriaComponent } from './criteria/criteria.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { GradesComponent } from './grades/grades.component';
     EvaluationDetailComponent,
     StudentsComponent,
     StudentDetailComponent,
-    GradesComponent
+    CriteriaComponent
   ],
   imports: [
     BrowserModule,

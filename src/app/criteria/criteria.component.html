@@ -1,0 +1,30 @@
+<br>
+
+<mat-card *ngIf="evaluationComponent && course">
+  <h2>{{course.name}}</h2>
+  <h2>Critérios de {{evaluationComponent.name}}</h2>
+  <label matInput for="new-name">Nome do Critério: </label>
+  <textarea matInput id="new-name" #criteriaName></textarea>
+  <label matInput for="new-value">Valor do Critério: </label>
+  <textarea matInput id="new-value" #criteriaValue></textarea>
+
+  <button mat-raised-button color="accent" (click)="add(criteriaName.value, criteriaValue.value); criteriaName.value=''; criteriaValue.value='' ">
+    Adicionar Critério
+  </button>
+  &nbsp;
+  <button mat-raised-button color="accent" routerLink="/disciplines" [state]="course">
+    Voltar
+  </button>
+
+  <mat-accordion multi="true">
+    <mat-expansion-panel *ngFor="let criteria of criterias">
+      <mat-expansion-panel-header>
+        <h1>{{ criteria.name }} - {{ criteria.percent }} </h1>
+      </mat-expansion-panel-header>
+  <button button mat-raised-button color="accent" (click)=delete(criteria)>Eliminar</button>
+        &nbsp;
+  <button button mat-raised-button color="accent" routerLink="/edit_student">Editar</button>
+        &nbsp;
+  </mat-expansion-panel>
+  </mat-accordion>
+</mat-card>
