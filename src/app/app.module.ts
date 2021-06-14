@@ -20,6 +20,7 @@ import { StudentsComponent } from './students/students.component';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
 import { CriteriaComponent } from './criteria/criteria.component';
 import { GradesComponent } from './grades/grades.component';
+import { CriteriaDetailComponent } from './criteria-detail/criteria-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { GradesComponent } from './grades/grades.component';
     StudentsComponent,
     StudentDetailComponent,
     GradesComponent,
-    CriteriaComponent
+    CriteriaComponent,
+    CriteriaDetailComponent
   ],
   imports: [
     BrowserModule,
