@@ -3,6 +3,8 @@ import { Student } from '../students/student';
 import { EvaluationComponent } from '../courses/evaluation-components/evaluation-component';
 import { GradeService } from './grades.service';
 import { Grade } from './grade';
+import { Criteria } from '../criteria/criteria';
+import { Course } from '../courses/course';
 
 @Component({
   selector: 'app-grades',
@@ -12,21 +14,25 @@ import { Grade } from './grade';
 export class GradesComponent implements OnInit {
   grades: Grade[] = [];
 
-  @Input() criteria?: EvaluationComponent;
+  @Input() criteria?: Criteria;
   @Input() student?: Student;
+  @Input() evaluationComponent?: EvaluationComponent;
+  @Input() course?: Course;
 
   constructor(private gradeService: GradeService) {}
 
   ngOnInit(): void {
     this.criteria = history.state.criteria;
     this.student = history.state.student;
+    this.evaluationComponent = history.state.evaluationComponent;
+    this.course = history.state.course;
     this.getGrades();
   }
 
   getGrades(): void {
     if (this.criteria && this.student) {
       this.gradeService
-        .getGrades(this.student, this.criteria)
+        .getGrades(this.criteria, this.student)
         .subscribe((response) => (this.grades = response));
     }
   }
@@ -39,7 +45,7 @@ export class GradesComponent implements OnInit {
     grade = parseFloat(number);
     if (this.criteria && this.student) {
       this.gradeService
-        .addGrade(this.student, this.criteria, { grade } as Grade)
+        .addGrade(this.criteria, this.student, { grade } as Grade)
         .subscribe((grade) => {
           this.grades.push(grade);
         });

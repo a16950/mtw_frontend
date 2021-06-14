@@ -33,7 +33,8 @@ import { CriteriaDetailComponent } from './criteria-detail/criteria-detail.compo
     StudentDetailComponent,
     GradesComponent,
     CriteriaComponent,
-    CriteriaDetailComponent
+    CriteriaDetailComponent,
+    GradesComponent
   ],
   imports: [
     BrowserModule,

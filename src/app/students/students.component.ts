@@ -31,14 +31,7 @@ export class StudentsComponent implements OnInit {
     this.getCriteria();
 
   }
-
-  calculate(field:string, multiplier:number)
-  {
-    var percent : number;
-    percent = parseFloat(field);
-    this.aux = percent * multiplier / 100;
-  }
-
+  
   getStudents():void
   {
     if (this.evaluationComponent && this.course)

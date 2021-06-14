@@ -6,12 +6,13 @@ import { ServiceHelpers } from '../criteria/service-helpers';
 import { Student } from '../students/student';
 import { EvaluationComponent } from '../courses/evaluation-components/evaluation-component';
 import { Grade } from './grade';
+import { Criteria } from '../criteria/criteria';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GradeService {
-  private baseUrl = 'http://localhost:3000/students';
+  private baseUrl = 'http://localhost:3000/courses';
   private gradePath = 'grades';
   private evaluationPath = 'evaluation-components';
 
@@ -24,8 +25,8 @@ export class GradeService {
     private serviceHelpers: ServiceHelpers
   ) {}
 
-  getGrades(student:Student, evaluationcomponent: EvaluationComponent): Observable<Grade[]> {
-    const url = this.buildGradeUrl(student, evaluationcomponent);
+  getGrades(criteria: Criteria, student: Student): Observable<Grade[]> {
+    const url = this.buildGradeUrl(criteria, student);
     return this.http
       .get<Grade[]>(url)
       .pipe(
@@ -38,17 +39,17 @@ export class GradeService {
       );
   }
 
-  buildGradeUrl(student:Student, evaluation: EvaluationComponent) {
-    const url = `${this.baseUrl}/${student._id}/${this.evaluationPath}/${evaluation._id}/${this.gradePath}`;
+  buildGradeUrl(criteria:Criteria, student:Student) {
+    const url = `${this.baseUrl}/${student._id}/${this.gradePath}`;
     console.log(url);
-    return `${this.baseUrl}/${student._id}/${this.evaluationPath}/${evaluation._id}/${this.gradePath}`;
+    return `${this.baseUrl}/${student._id}/${this.gradePath}`;
   }
 
-  addGrade(student:Student, evaluation: EvaluationComponent, grade: Grade): Observable<Grade> {
+  addGrade(criteria: Criteria, student: Student, grade: Grade): Observable<Grade> {
     grade.student = student._id;
     return this.http
       .post<Grade>(
-        this.buildGradeUrl(student, evaluation),
+        this.buildGradeUrl(criteria, student),
         grade,
         this.httpOptions
       )
@@ -57,9 +58,9 @@ export class GradeService {
 
 
 
-  deleteGrade(id: number, evaluationComponent: EvaluationComponent, student:Student): Observable<Grade> {
+  deleteGrade(id: number, criteria: Criteria, student: Student): Observable<Grade> {
     console.log(id);
-    const ur = this.buildGradeUrl(student, evaluationComponent);
+    const ur = this.buildGradeUrl(criteria, student);
     const url = `${ur}/${id}`;
 
     return this.http.delete<Grade>(url, this.httpOptions).pipe(
@@ -68,8 +69,8 @@ export class GradeService {
     );
   }
 
-  updateGrade(student:Student, evaluation: EvaluationComponent, grade: Grade): Observable<any> {
-    const ur = this.buildGradeUrl(student, evaluation);
+  updateGrade(criteria: Criteria, student: Student, grade: Grade): Observable<any> {
+    const ur = this.buildGradeUrl(criteria, student);
     const url = `${ur}/${grade._id}`;
 
     return this.http.put(url, grade, this.httpOptions).pipe(
@@ -78,8 +79,8 @@ export class GradeService {
     );
   }
 
-  getGrade(id: number, evaluation: EvaluationComponent, student:Student): Observable<Grade> {
-    const url = `${this.buildGradeUrl(student,evaluation)}/${id}`;
+  getGrade(id: number, criteria: Criteria, student: Student): Observable<Grade> {
+    const url = `${this.buildGradeUrl(criteria, student)}/${id}`;
     return this.http
       .get<Grade>(url)
       .pipe(
