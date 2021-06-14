@@ -20,9 +20,9 @@
       </mat-expansion-panel-header>
       <div *ngFor="let criteria of criterias">
         <div><span> {{criteria.name}} - </span>{{ criteria.percent }} %
-          <input/>
-          &nbsp;
-          <input/>
+          <input #value />
+          <button button mat-raised-button color="accent" (click)="calculate(value.value,criteria.percent)">Calculate</button>
+          <h2>Componente: {{aux}}</h2>
         </div>
         &nbsp;
       </div>
@@ -32,8 +32,7 @@
   <button button mat-raised-button color="accent" routerLink="/edit_student"
         [state]="{evaluation:evaluationComponent, course:course, student:student }">Editar</button>
         &nbsp;
-  <button button mat-raised-button color="accent" routerLink="/grades"
-        [state]="{student:student}">Grades</button>
+  <button button mat-raised-button color="accent">...</button>
   </mat-expansion-panel>
   </mat-accordion>
 </mat-card>

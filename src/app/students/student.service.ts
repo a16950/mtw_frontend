@@ -45,6 +45,7 @@ export class StudentService {
     return `${this.baseUrl}/${course._id}/${this.evaluationPath}/${evaluation._id}/${this.studentPath}`;
   }
 
+
   addStudent(course:Course, evaluation: EvaluationComponent, student: Student): Observable<Student> {
     student.evaluationComponent = evaluation._id;
     return this.http

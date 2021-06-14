@@ -14,6 +14,7 @@ import { Criteria } from '../criteria/criteria';
 export class StudentsComponent implements OnInit {
   students: Student[] = [];
   criterias: Criteria[] = [];
+  aux: number = 0;
 
 
   @Input() evaluationComponent?: EvaluationComponent;
@@ -29,6 +30,13 @@ export class StudentsComponent implements OnInit {
     this.getStudents();
     this.getCriteria();
 
+  }
+
+  calculate(field:string, multiplier:number)
+  {
+    var percent : number;
+    percent = parseFloat(field);
+    this.aux = percent * multiplier / 100;
   }
 
   getStudents():void
