@@ -1,0 +1,31 @@
+<br>
+
+<mat-card *ngIf="grade && criteria">
+  <h2>{{grades.grade}}</h2>
+  <h2>Nota do {{criteria.name}}</h2>
+  <label matInput for="new-grade">Nota: </label>
+  <textarea matInput id="new-grade" #gradeNumber></textarea>
+
+  <button mat-raised-button color="accent" (click)="add(gradeNumber.value); gradeNumber.value=''">
+    Adicionar Nota
+  </button>
+  &nbsp;
+  <button mat-raised-button color="accent" routerLink="/grades" [state]="disciplines">
+    Voltar
+  </button>
+
+  <mat-accordion multi="true">
+    <mat-expansion-panel *ngFor="let grade of grades">
+      <mat-expansion-panel-header>
+        {{ grade.grade }}
+      </mat-expansion-panel-header>
+  <button button mat-raised-button color="accent" (click)=delete(grade)>Eliminar</button>
+        &nbsp;
+  <button button mat-raised-button color="accent" routerLink="/edit_grade"
+        [state]="{evaluation:evaluationComponent, course:course, grade:grade }">Editar</button>
+        &nbsp;
+  <button button mat-raised-button color="accent" routerLink="/grades"
+        [state]="grade">Hmmm</button>
+  </mat-expansion-panel>
+  </mat-accordion>
+</mat-card>
