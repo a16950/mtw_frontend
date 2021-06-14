@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Course } from './course';
-import { ServiceHelpers } from '../service-helpers';
+import { ServiceHelpers } from '../criteria/service-helpers';
 
 @Injectable({
   providedIn: 'root'

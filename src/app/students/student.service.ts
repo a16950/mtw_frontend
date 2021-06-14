@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { ServiceHelpers } from '../service-helpers';
+import { ServiceHelpers } from '../criteria/service-helpers';
 import { Course } from '../courses/course';
 import { EvaluationComponent } from '../courses/evaluation-components/evaluation-component';
 import { Student } from './student';
