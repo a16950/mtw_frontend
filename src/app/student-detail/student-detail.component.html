@@ -1,0 +1,23 @@
+<br>
+<mat-card>
+<h1>Editar nome do Aluno</h1>
+</mat-card>
+<br>
+<mat-card *ngIf="student">
+  <h2>{{ student.name | uppercase }} </h2>
+  <div><span>id: </span>{{ student._id }}</div>
+  <div>
+    <label for="student-name">Nome do Aluno: </label>
+    <input
+      id="student-name"
+      [(ngModel)]="student.name"
+      placeholder="name"
+    />
+  </div>
+  <br>
+  <button mat-raised-button color="accent" (click)="save()" routerLink="/students"
+  [state]="{evaluationComponent:evaluation, course:course }">Guardar</button>
+  &nbsp;
+  <button mat-raised-button color="accent" routerLink="/students"
+  [state]="{evaluationComponent:evaluation, course:course }">Cancelar</button>
+</mat-card>

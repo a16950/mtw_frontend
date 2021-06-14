@@ -1,12 +1,12 @@
 
 <br>
 <mat-card>
-  <h2>Courses</h2>
-  <label matInput for="new-course">Course name: </label>
+  <h2>Cursos</h2>
+  <label matInput for="new-course">Nome do Curso: </label>
   <textarea matInput id="new-course" #courseName></textarea>
 
   <button mat-raised-button color="accent" (click)="add(courseName.value); courseName.value=''">
-    Add course
+    Adicionar Curso
   </button>
 </mat-card>
 <br>

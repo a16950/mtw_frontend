@@ -1,8 +1,8 @@
 <br>
 
 <mat-card *ngIf="evaluationComponent && course">
-  <h2>Alunos de {{evaluationComponent.name}}</h2>
   <h2>{{course.name}}</h2>
+  <h2>Alunos de {{evaluationComponent.name}}</h2>
   <label matInput for="new-student">Nome do Aluno: </label>
   <textarea matInput id="new-student" #studentName></textarea>
 
@@ -22,7 +22,7 @@
   <button button mat-raised-button color="accent" (click)=delete(student)>Eliminar</button>
         &nbsp;
   <button button mat-raised-button color="accent" routerLink="/edit_student"
-        [state]="{evaluation:evaluationComponent, course:course }">Editar</button>
+        [state]="{evaluation:evaluationComponent, course:course, student:student }">Editar</button>
         &nbsp;
   <button button mat-raised-button color="accent" routerLink="/grades"
         [state]="student">Hmmm</button>

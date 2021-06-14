@@ -73,7 +73,7 @@ export class StudentService {
     const ur = this.buildStudentUrl(course, evaluation);
     const url = `${ur}/${student._id}`;
 
-    return this.http.put(url, evaluation, this.httpOptions).pipe(
+    return this.http.put(url, student, this.httpOptions).pipe(
       tap((_) => console.log(`updated student id=${student._id}`)),
       catchError(this.serviceHelpers.handleError<any>('updateStudent'))
     );
