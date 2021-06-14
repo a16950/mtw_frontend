@@ -1,55 +1,53 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Student } from '../students/student';
-import { Criteria } from '../criteria/criteria';
+import { Component, OnInit, Input } from '@angular/core';
+import { Course } from '../students/student';
+import { EvaluationComponent } from '../students/evaluation-components/evaluation-component';
+import { GradeService } from './grades.service';
 import { Grade } from './grade';
-import { GradesService } from './grades.service';
 
 @Component({
   selector: 'app-grades',
   templateUrl: './grades.component.html',
-  styleUrls: ['./grades.component.css']
+  styleUrls: ['./grades.component.css'],
 })
 export class GradesComponent implements OnInit {
   grades: Grade[] = [];
 
-  @Input() student?: Student;
-  @Input() criteria?: Criteria;
+  @Input() criteria?: EvaluationComponent;
+  @Input() student?: Course;
 
-  constructor(private gradeService: GradesService) {}
+
+  constructor(private gradeService: GradeService) {}
 
   ngOnInit(): void {
-    this.student = history.state.student;
     this.criteria = history.state.criteria;
+    this.student = history.state.student;
     this.getGrades();
   }
 
   getGrades(): void {
-    if (this.student && this.criteria) {
+    if (this.criteria && this.student) {
       this.gradeService
-        .getStudents(this.student, this.criteria)
+        .getGrades(this.student, this.criteria)
         .subscribe((response) => this.grades = response);
     }
   }
 
-  add(name: string): void {name = name.trim(); if (!name) { return; }
-    if (this.evaluationComponent && this.course)
+  add(grade: number): void {if (!grade) { return; }
+    if (this.criteria && this.student)
     {
-    this.studentService.addStudent(this.course, this.evaluationComponent, {name} as Student)
-      .subscribe(student => {
-        this.students.push(student);
+    this.gradeService.addGrade(this.student, this.criteria, {grade} as Grade)
+      .subscribe(grade => {
+        this.grades.push(grade);
       });
     }
   }
 
-  delete(student: Student): void {
-    if (this.evaluationComponent && this.course) {
-      this.students = this.students.filter((c) => c !== student);
-      this.studentService
-        .deleteStudent(student._id, this.evaluationComponent, this.course)
+  delete(grade: Grade): void {
+    if (this.criteria && this.student) {
+      this.grades = this.grades.filter((c) => c !== grade);
+      this.gradeService
+        .deleteGrade(grade._id, this.criteria, this.student)
         .subscribe();
     }
   }
-}
-
-
 }
