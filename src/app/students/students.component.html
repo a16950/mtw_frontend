@@ -1,5 +1,4 @@
 <br>
-
 <mat-card *ngIf="evaluationComponent && course">
   <h2>{{course.name}}</h2>
   <h2>Alunos de {{evaluationComponent.name}}</h2>
@@ -25,7 +24,7 @@
         [state]="{evaluation:evaluationComponent, course:course, student:student }">Editar</button>
         &nbsp;
   <button button mat-raised-button color="accent" routerLink="/grades"
-        [state]="student">Grades</button>
+        [state]="{student:student}">Grades</button>
   </mat-expansion-panel>
   </mat-accordion>
 </mat-card>

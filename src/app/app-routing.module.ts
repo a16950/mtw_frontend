@@ -6,6 +6,7 @@ import { EvaluationComponentsComponent } from './courses/evaluation-components/e
 import { CriteriaDetailComponent } from './criteria-detail/criteria-detail.component';
 import { CriteriaComponent } from './criteria/criteria.component';
 import { EvaluationDetailComponent } from './evaluation-detail/evaluation-detail.component';
+import { GradesComponent } from './grades/grades.component';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
 import { StudentsComponent } from './students/students.component';
 
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path: "students", component:StudentsComponent},
   {path: "edit_student", component:StudentDetailComponent},
   {path: "criterias", component:CriteriaComponent},
-  {path: "edit_criteria", component:CriteriaDetailComponent}
+  {path: "edit_criteria", component:CriteriaDetailComponent},
+  {path: "grades", component:GradesComponent}
 ];
 
 @NgModule({
