@@ -6,6 +6,7 @@ import { ServiceHelpers } from '../service-helpers';
 import { Course } from '../courses/course';
 import { EvaluationComponent } from '../courses/evaluation-components/evaluation-component';
 import { Student } from './student';
+import { StudentsComponent } from './students.component';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ import { Student } from './student';
 export class StudentService {
   private baseUrl = 'http://localhost:3000/courses';
   private studentPath = 'students';
+  private evaluationPath = 'evaluation-components';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -23,8 +25,8 @@ export class StudentService {
     private serviceHelpers: ServiceHelpers
   ) {}
 
-  getStudents(evaluationcomponent: EvaluationComponent): Observable<Student[]> {
-    const url = this.buildStudentUrl(evaluationcomponent);
+  getStudents(course:Course, evaluationcomponent: EvaluationComponent): Observable<Student[]> {
+    const url = this.buildStudentUrl(course, evaluationcomponent);
     return this.http
       .get<Student[]>(url)
       .pipe(
@@ -37,23 +39,28 @@ export class StudentService {
       );
   }
 
-  buildStudentUrl(evaluation: EvaluationComponent) {
-    return `${this.baseUrl}/${evaluation._id}/${this.studentPath}`;
+  buildStudentUrl(course:Course, evaluation: EvaluationComponent) {
+    const url = `${this.baseUrl}/${course._id}/${this.evaluationPath}/${evaluation._id}/${this.studentPath}`;
+    console.log(url);
+    return `${this.baseUrl}/${course._id}/${this.evaluationPath}/${evaluation._id}/${this.studentPath}`;
   }
 
-  addStudent(evaluation: EvaluationComponent, student: Student): Observable<Student> {
+  addStudent(course:Course, evaluation: EvaluationComponent, student: Student): Observable<Student> {
+    student.evaluationComponent = evaluation._id;
     return this.http
       .post<Student>(
-        this.buildStudentUrl(evaluation),
+        this.buildStudentUrl(course, evaluation),
         student,
         this.httpOptions
       )
       .pipe(catchError(this.serviceHelpers.handleError<Student>('addStudent')));
   }
 
-  deleteStudent(id: number, evaluationComponent: EvaluationComponent
-  ): Observable<Student> {
-    const ur = this.buildStudentUrl(evaluationComponent);
+
+
+  deleteStudent(id: number, evaluationComponent: EvaluationComponent, course:Course): Observable<Student> {
+    console.log(id);
+    const ur = this.buildStudentUrl(course, evaluationComponent);
     const url = `${ur}/${id}`;
 
     return this.http.delete<Student>(url, this.httpOptions).pipe(
@@ -62,18 +69,18 @@ export class StudentService {
     );
   }
 
-  updateStudent(evaluation: EvaluationComponent): Observable<any> {
-    const ur = this.buildStudentUrl(evaluation);
-    const url = `${ur}/${evaluation._id}`;
+  updateStudent(course:Course, evaluation: EvaluationComponent, student: Student): Observable<any> {
+    const ur = this.buildStudentUrl(course, evaluation);
+    const url = `${ur}/${student._id}`;
 
     return this.http.put(url, evaluation, this.httpOptions).pipe(
-      tap((_) => console.log(`updated evaluation id=${evaluation._id}`)),
+      tap((_) => console.log(`updated student id=${student._id}`)),
       catchError(this.serviceHelpers.handleError<any>('updateStudent'))
     );
   }
 
-  getStudent(id: number, evaluation: EvaluationComponent): Observable<Student> {
-    const url = `${this.buildStudentUrl(evaluation)}/${id}`;
+  getStudent(id: number, evaluation: EvaluationComponent, course:Course): Observable<Student> {
+    const url = `${this.buildStudentUrl(course,evaluation)}/${id}`;
     return this.http
       .get<Student>(url)
       .pipe(

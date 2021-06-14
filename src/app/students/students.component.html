@@ -10,7 +10,7 @@
     Adicionar Aluno
   </button>
   &nbsp;
-  <button mat-raised-button color="accent" routerLink="/disciplines">
+  <button mat-raised-button color="accent" routerLink="/disciplines" [state]="course">
     Voltar
   </button>
 
@@ -22,7 +22,7 @@
   <button button mat-raised-button color="accent" (click)=delete(student)>Eliminar</button>
         &nbsp;
   <button button mat-raised-button color="accent" routerLink="/edit_student"
-        [state]="{student:student, evaluationComponent:evaluationComponent}">Editar</button>
+        [state]="{evaluation:evaluationComponent, course:course }">Editar</button>
         &nbsp;
   <button button mat-raised-button color="accent" routerLink="/grades"
         [state]="student">Hmmm</button>

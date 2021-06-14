@@ -25,17 +25,17 @@ export class StudentsComponent implements OnInit {
   }
 
   getStudents(): void {
-    if (this.evaluationComponent) {
+    if (this.evaluationComponent && this.course) {
       this.studentService
-        .getStudents(this.evaluationComponent)
+        .getStudents(this.course, this.evaluationComponent)
         .subscribe((response) => this.students = response);
     }
   }
 
   add(name: string): void {name = name.trim(); if (!name) { return; }
-    if (this.evaluationComponent)
+    if (this.evaluationComponent && this.course)
     {
-    this.studentService.addStudent(this.evaluationComponent, { name } as Student)
+    this.studentService.addStudent(this.course, this.evaluationComponent, {name} as Student)
       .subscribe(student => {
         this.students.push(student);
       });
@@ -43,10 +43,10 @@ export class StudentsComponent implements OnInit {
   }
 
   delete(student: Student): void {
-    if (this.evaluationComponent) {
+    if (this.evaluationComponent && this.course) {
       this.students = this.students.filter((c) => c !== student);
       this.studentService
-        .deleteStudent(student._id, this.evaluationComponent)
+        .deleteStudent(student._id, this.evaluationComponent, this.course)
         .subscribe();
     }
   }
