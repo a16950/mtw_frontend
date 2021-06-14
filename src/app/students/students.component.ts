@@ -2,7 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Course } from '../courses/course';
 import { EvaluationComponent } from '../courses/evaluation-components/evaluation-component';
 import { StudentService } from './student.service';
+import { CriteriaService } from '../criteria/criteria.service';
 import { Student } from './student';
+import { Criteria } from '../criteria/criteria';
 
 @Component({
   selector: 'app-students',
@@ -11,26 +13,44 @@ import { Student } from './student';
 })
 export class StudentsComponent implements OnInit {
   students: Student[] = [];
+  criterias: Criteria[] = [];
+
 
   @Input() evaluationComponent?: EvaluationComponent;
   @Input() course?: Course;
 
 
-  constructor(private studentService: StudentService) {}
+  constructor(private studentService: StudentService,
+    private criteriaService: CriteriaService) {}
 
   ngOnInit(): void {
     this.evaluationComponent = history.state.evaluationComponent;
     this.course = history.state.course;
     this.getStudents();
+    this.getCriteria();
+
   }
 
-  getStudents(): void {
-    if (this.evaluationComponent && this.course) {
+  getStudents():void
+  {
+    if (this.evaluationComponent && this.course)
+    {
       this.studentService
         .getStudents(this.course, this.evaluationComponent)
         .subscribe((response) => this.students = response);
     }
   }
+
+  getCriteria():void
+  {
+    if (this.evaluationComponent && this.course)
+    {
+    this.criteriaService.getCriterias(this.course, this.evaluationComponent)
+    .subscribe((response) => this.criterias = response);
+    }
+  }
+
+ 
 
   add(name: string): void {name = name.trim(); if (!name) { return; }
     if (this.evaluationComponent && this.course)

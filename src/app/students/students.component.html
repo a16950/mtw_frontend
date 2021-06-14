@@ -18,6 +18,15 @@
       <mat-expansion-panel-header>
         {{ student.name }}
       </mat-expansion-panel-header>
+      <div *ngFor="let criteria of criterias">
+        <div><span> {{criteria.name}} - </span>{{ criteria.percent }} %
+          <input/>
+          &nbsp;
+          <input/>
+        </div>
+        &nbsp;
+      </div>
+      &nbsp;
   <button button mat-raised-button color="accent" (click)=delete(student)>Eliminar</button>
         &nbsp;
   <button button mat-raised-button color="accent" routerLink="/edit_student"
