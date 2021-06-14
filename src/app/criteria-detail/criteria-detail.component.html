@@ -1,0 +1,32 @@
+<br>
+<mat-card>
+<h1>Editar Critério</h1>
+</mat-card>
+<br>
+<mat-card *ngIf="criteria">
+  <h2>{{ criteria.name | uppercase }} </h2>
+  <h2>{{ criteria.percent }} </h2>
+  <div><span>id: </span>{{ criteria._id }}</div>
+  <div>
+    <label for="criteria-name">Nome do Critério: </label>
+    <input
+      id="criteria-name"
+      [(ngModel)]="criteria.name"
+      placeholder="name"
+    />
+  </div>
+  <div>
+    <label for="criteria-value">Valor do Critério: </label>
+    <input
+      id="criteria-value"
+      [(ngModel)]="criteria.percent"
+      placeholder="percent"
+    />
+  </div>
+  <br>
+  <button mat-raised-button color="accent" (click)="save()" routerLink="/criterias"
+  [state]="{evaluationComponent:evaluation, course:course}">Guardar</button>
+  &nbsp;
+  <button mat-raised-button color="accent" routerLink="/criterias"
+  [state]="{evaluationComponent:evaluation, course:course }">Cancelar</button>
+</mat-card>
