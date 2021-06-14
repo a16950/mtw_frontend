@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Course } from '../students/student';
-import { EvaluationComponent } from '../students/evaluation-components/evaluation-component';
+import { Student } from '../students/student';
+import { EvaluationComponent } from '../courses/evaluation-components/evaluation-component';
 import { GradeService } from './grades.service';
 import { Grade } from './grade';
 
@@ -13,8 +13,7 @@ export class GradesComponent implements OnInit {
   grades: Grade[] = [];
 
   @Input() criteria?: EvaluationComponent;
-  @Input() student?: Course;
-
+  @Input() student?: Student;
 
   constructor(private gradeService: GradeService) {}
 
@@ -28,17 +27,22 @@ export class GradesComponent implements OnInit {
     if (this.criteria && this.student) {
       this.gradeService
         .getGrades(this.student, this.criteria)
-        .subscribe((response) => this.grades = response);
+        .subscribe((response) => (this.grades = response));
     }
   }
 
-  add(grade: number): void {if (!grade) { return; }
-    if (this.criteria && this.student)
-    {
-    this.gradeService.addGrade(this.student, this.criteria, {grade} as Grade)
-      .subscribe(grade => {
-        this.grades.push(grade);
-      });
+  add(number: string): void {
+    if (!number) {
+      return;
+    }
+    var grade: number;
+    grade = parseFloat(number);
+    if (this.criteria && this.student) {
+      this.gradeService
+        .addGrade(this.student, this.criteria, { grade } as Grade)
+        .subscribe((grade) => {
+          this.grades.push(grade);
+        });
     }
   }
 
